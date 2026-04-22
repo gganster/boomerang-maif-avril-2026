@@ -11,17 +11,19 @@ type TaskFormProps = {
 const TaskForm = ({ onSubmit, defaultValues }: TaskFormProps) => {
   const [text, setText] = useState(defaultValues?.text || "");
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (!text) return;
     onSubmit({text});
     setText("");
   }
 
   return (
-    <div className="flex justify-center gap-2 ">
+    <form onSubmit={handleSubmit} className="flex justify-center gap-2 ">
       <Input placeholder="Enter a new task..." value={text} onChange={e => setText(e.target.value)} />
-      <Button onClick={handleSubmit}>submit</Button>
-    </div>
+      <Button type="submit">submit</Button>
+    </form>
   )
 }
 

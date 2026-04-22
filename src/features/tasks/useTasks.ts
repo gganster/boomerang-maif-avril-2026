@@ -11,15 +11,12 @@ const useTasks = () => {
   })
 
   const {mutate: handleAddTask} = useMutation({
-    mutationFn: async (data: Omit<Task, "id">) => {
-      console.log("Adding task with data:", data);
-      return await fetch("http://localhost:3001/tasks", {
-        method: "POST",
-        body: JSON.stringify(data)
-      })
-    },
+    mutationFn: (data: Omit<Task, "id">) => apiClient<Task>("/tasks", {
+      method: "POST",
+      body: JSON.stringify(data)
+    }),
     onSuccess: () => {
-      //queryClient.invalidateQueries({queryKey: ["tasks"]})
+      queryClient.invalidateQueries({queryKey: ["tasks"]})
     }
   })
 
@@ -28,7 +25,7 @@ const useTasks = () => {
       method: "DELETE"
     }),
     onSuccess: () => {
-      //queryClient.invalidateQueries({queryKey: ["tasks"]})
+      queryClient.invalidateQueries({queryKey: ["tasks"]})
     },
   })
 
@@ -38,7 +35,7 @@ const useTasks = () => {
       body: JSON.stringify(data)
     }),
     onSuccess: () => {
-      //queryClient.invalidateQueries({queryKey: ["tasks"]})
+      queryClient.invalidateQueries({queryKey: ["tasks"]})
     },
   })
 
