@@ -1,15 +1,16 @@
+import { ErrorBoundary } from "react-error-boundary";
 import { TaskForm } from "../features/tasks/TaskForm"
 import { TaskList } from "../features/tasks/TaskList"
 import { useTasks } from "../features/tasks/useTasks";
-import { useEffect, useRef } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Textarea } from "../components/Textarea";
+import { createFileRoute } from "@tanstack/react-router";
+import { ErrorDisplay } from "../components/ErrorDisplay";
+import { Suspense } from "react";
 
 export const Route = createFileRoute('/')({
   component: App,
 })
 
-function App() {
+function AppView() {
   const {
     tasks,
     handleAddTask,
@@ -28,3 +29,15 @@ function App() {
     </div>
   )
 }
+
+const AppLoading = () => <p>Loading ... //TODO</p>
+
+const AppError = ErrorDisplay;
+
+const App = () => (
+  <ErrorBoundary fallbackRender={AppError}>
+    <Suspense fallback={<AppLoading />}>
+      <AppView />
+    </Suspense>
+  </ErrorBoundary>
+)

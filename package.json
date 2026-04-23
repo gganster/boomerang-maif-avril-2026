@@ -18,6 +18,7 @@
     "@tanstack/react-router-devtools": "^1.166.13",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "react-error-boundary": "^6.1.1",
     "react-hook-form": "^7.73.1",
     "tailwindcss": "^4.2.4",
     "usehooks-ts": "^3.1.1",

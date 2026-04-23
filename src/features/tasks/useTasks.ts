@@ -1,11 +1,11 @@
 import { apiClient } from "../../apiClient";
 import type { Task } from "../../type";
-import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { useQueryClient, useMutation, useSuspenseQuery } from "@tanstack/react-query";
 
 const useTasks = () => {
   const queryClient = useQueryClient();
 
-  const { data: tasks } = useQuery({
+  const { data: tasks } = useSuspenseQuery({
     queryKey: ["tasks"],
     queryFn: () => apiClient<Task[]>("/tasks")
   })
@@ -42,7 +42,7 @@ const useTasks = () => {
   })
 
   return {
-    tasks: tasks || [],
+    tasks: tasks,
     handleAddTask,
     handleDeleteTask,
     handleUpdateTask
