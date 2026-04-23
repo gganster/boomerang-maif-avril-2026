@@ -16,8 +16,7 @@ const TaskForm = ({ onSubmit, defaultValues }: TaskFormProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<TaskFormData>({
     resolver: zodResolver(TaskFormSchema),
     defaultValues: {
-      text: defaultValues?.text || "",
-      done: defaultValues?.done ?? false
+      text: defaultValues?.text || ""
     }
   });
 

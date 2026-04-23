@@ -6,10 +6,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ErrorDisplay } from "../components/ErrorDisplay";
 import { Suspense } from "react";
 
-export const Route = createFileRoute('/')({
-  component: App,
-})
-
 function AppView() {
   const {
     tasks,
@@ -41,3 +37,7 @@ const App = () => (
     </Suspense>
   </ErrorBoundary>
 )
+
+export const Route = createFileRoute('/')({
+  component: App,
+})

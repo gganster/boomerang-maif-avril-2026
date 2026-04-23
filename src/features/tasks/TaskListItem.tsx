@@ -32,16 +32,9 @@ const TaskListItem = ({item, onDelete, onUpdate}: TaskListItemProps) => {
           onSubmit={(data) => {onUpdate?.(item.id, data); setIsEditing(false)}}
         />
       :
-        <label className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            checked={item.done}
-            onChange={() => onUpdate?.(item.id, {text: item.text, done: !item.done})}
-          />
-          <span className={item.done ? "line-through text-gray-500" : ""}>
-            {item.text} - {countDown}
-          </span>
-        </label>
+        <span>
+          {item.text} - {countDown}
+        </span>
       }
       <div className="flex gap-2">
         {onUpdate && !isEditing ?

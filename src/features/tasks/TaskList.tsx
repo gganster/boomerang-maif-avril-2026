@@ -9,7 +9,7 @@ type TaskListProps = {
 
 const TaskList = ({items, onDelete, onUpdate}: TaskListProps) => {
   return (
-    <div className="mx-auto max-w-5xl flex flex-col gap-4">
+    <div className="mx-auto max-w-6xl flex flex-col gap-4">
       {items.map(i => (
         <TaskListItem
           key={i.id}
