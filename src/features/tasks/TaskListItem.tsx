@@ -26,20 +26,29 @@ const TaskListItem = ({item, onDelete, onUpdate}: TaskListItemProps) => {
 
   return (
     <div className="border p-2 rounded mx-auto max-w-5xl flex justify-between gap-4">
-      {isEditing ? 
-        <TaskForm 
+      {isEditing ?
+        <TaskForm
           defaultValues={item}
           onSubmit={(data) => {onUpdate?.(item.id, data); setIsEditing(false)}}
         />
-      : 
-        <span>{item.text} - {countDown}</span>
+      :
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={item.done}
+            onChange={() => onUpdate?.(item.id, {text: item.text, done: !item.done})}
+          />
+          <span className={item.done ? "line-through text-gray-500" : ""}>
+            {item.text} - {countDown}
+          </span>
+        </label>
       }
       <div className="flex gap-2">
-        {onUpdate && !isEditing ? 
-          <Button onClick={() => setIsEditing(true)}>update</Button> 
+        {onUpdate && !isEditing ?
+          <Button onClick={() => setIsEditing(true)}>update</Button>
         : null}
-        {onDelete && !isEditing ? 
-          <Button onClick={() => onDelete(item.id)}>delete</Button> 
+        {onDelete && !isEditing ?
+          <Button onClick={() => onDelete(item.id)}>delete</Button>
         : null}
       </div>
     </div>

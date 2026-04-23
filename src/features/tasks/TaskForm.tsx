@@ -15,7 +15,7 @@ const TaskForm = ({ onSubmit, defaultValues }: TaskFormProps) => {
     e.preventDefault();
 
     if (!text) return;
-    onSubmit({text});
+    onSubmit({text, done: defaultValues?.done ?? false});
     setText("");
   }
 

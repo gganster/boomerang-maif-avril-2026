@@ -15,8 +15,10 @@ const useTasks = () => {
       method: "POST",
       body: JSON.stringify(data)
     }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ["tasks"]})
+    onSuccess: (data) => {
+      console.log(data);
+      //queryClient.invalidateQueries({queryKey: ["tasks"]})
+      queryClient.setQueryData<Task[]>(["tasks"],  old => [...(old ?? []), data]);
     }
   })
 
@@ -34,8 +36,8 @@ const useTasks = () => {
       method: "PUT",
       body: JSON.stringify(data)
     }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ["tasks"]})
+    onSuccess: (updated) => {
+      queryClient.setQueryData<Task[]>(["tasks"], old => old?.map(t => t.id === updated.id ? updated : t) ?? []);
     },
   })
 
