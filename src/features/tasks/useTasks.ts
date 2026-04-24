@@ -7,13 +7,14 @@ const useTasks = () => {
 
   const { data: tasks } = useSuspenseQuery({
     queryKey: ["tasks"],
-    queryFn: () => apiClient<Task[]>("/tasks")
+    queryFn: () => apiClient<Task[]>({url: "/tasks", method: "GET", body: undefined})
   })
 
   const {mutate: handleAddTask} = useMutation({
-    mutationFn: (data: Omit<Task, "id">) => apiClient<Task>("/tasks", {
+    mutationFn: (data: Omit<Task, "id">) => apiClient<Task>({
+      url: "/tasks",
       method: "POST",
-      body: JSON.stringify(data)
+      body: data
     }),
     onSuccess: (data) => {
       console.log(data);
@@ -23,8 +24,10 @@ const useTasks = () => {
   })
 
   const {mutate: handleDeleteTask} = useMutation({
-    mutationFn: (id: string) => apiClient<void>(`/tasks/${id}`, {
-      method: "DELETE"
+    mutationFn: (id: string) => apiClient<void>({
+      url: `/tasks/${id}`,
+      method: "DELETE",
+      body: undefined
     }),
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ["tasks"]})
@@ -32,9 +35,10 @@ const useTasks = () => {
   })
 
   const {mutate: handleUpdateTask} = useMutation({
-    mutationFn: ({id, data}: {id: string; data: Omit<Task, "id">}) => apiClient<Task>(`/tasks/${id}`, {
+    mutationFn: ({id, data}: {id: string; data: Omit<Task, "id">}) => apiClient<Task>({
+      url: `/tasks/${id}`,
       method: "PUT",
-      body: JSON.stringify(data)
+      body: data
     }),
     onSuccess: (updated) => {
       queryClient.setQueryData<Task[]>(["tasks"], old => old?.map(t => t.id === updated.id ? updated : t) ?? []);

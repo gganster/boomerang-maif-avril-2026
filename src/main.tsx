@@ -14,6 +14,7 @@ import {
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ErrorDisplay } from './components/ErrorDisplay';
+import { AuthProvider } from './stores/Auth';
 
 // Create a new router instance
 const router = createRouter({ routeTree })
@@ -35,8 +36,10 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <ErrorBoundary fallback={<ErrorDisplay />}>
         <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-          <ReactQueryDevtools initialIsOpen={false} />
+          <AuthProvider>
+            <RouterProvider router={router} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </AuthProvider>
         </QueryClientProvider>
       </ErrorBoundary>
     </StrictMode>,

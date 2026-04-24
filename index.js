@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DB_PATH = join(__dirname, "db.json");
+const DB_PATH = join(__dirname, "../db.json");
 const PORT = process.env.PORT || 3001;
 
 // Hardcoded for pedagogical purposes — do not use in production.
