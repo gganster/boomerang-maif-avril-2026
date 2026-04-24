@@ -1,0 +1,20 @@
+{
+  "tasks": [
+    {
+      "id": "d6e95407-673d-4253-91c7-39654e9d2dd6",
+      "text": "no auth needed"
+    }
+  ],
+  "users": [
+    {
+      "id": "a36954ff-b4ac-421d-8f2e-f9ec47621068",
+      "email": "alice@example.com",
+      "password": "secret"
+    },
+    {
+      "id": "51ef3ee6-fbeb-4876-a854-f3dea914ef61",
+      "email": "bob@example.com",
+      "password": "hunter2"
+    }
+  ]
+}
